@@ -1,0 +1,20 @@
+{
+  "name": "job-portal-project",
+  "version": "1.0.0",
+  "description": "job portal project",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js"
+  },
+  "author": "Neel",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "job-portal-project": "file:",
+    "mongoose": "^8.16.1",
+    "nodemon": "^3.1.10"
+  }
+}

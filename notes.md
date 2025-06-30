@@ -56,3 +56,7 @@ ES Modules are natively supported in modern browsers and Node.js(as of version 1
 CommonJS was the default for Node.jsbefore ES Modules were introduced.
 
 If you're writing modern JavaScript, ES Modules are typically preferred, but CommonJS is still widely used, especially in older Node.jsprojects. They're like two different dialects—use the one best suited for your situation.
+
+
+MVC -> model consists of database design and schema, view -> template engine can be anything like react , vue and controller consists of API or business logic.
+
