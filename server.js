@@ -6,6 +6,9 @@ import connectDB from "./config/db.js";
 import cors from "cors";
 import morgan from "morgan";
 import testRoutes from "./routes/testRoutes.js"
+import authRoutes from "./routes/authRoutes.js"
+import errorMiddleware from "./middelwares/errorMiddleware.js";
+ 
 
 dotenv.config();
 
@@ -24,6 +27,10 @@ app.use(morgan("dev"));
 
 //routes
 app.use("/api/v1/test/",testRoutes)
+app.use("/api/v1/auth",authRoutes)
+
+// validation middleware
+app.use(errorMiddleware)
 
 //port
 const PORT = process.env.PORT || 8080;
