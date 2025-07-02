@@ -3,6 +3,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import connectDB from "./config/db.js";
+import testRoutes from "./routes/testRoutes.js"
 
 dotenv.config();
 
@@ -13,9 +14,7 @@ connectDB();
 const app = express();
 
 //routes
-app.get("/", (req, res) => {
-  res.send("<h1> welcome to my  job portal</h1>");
-});
+app.use("/api/v1/test",testRoutes)
 
 //port
 const PORT = process.env.PORT || 8080;
