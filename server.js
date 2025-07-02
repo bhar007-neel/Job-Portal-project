@@ -3,6 +3,8 @@
 import express from "express";
 import dotenv from "dotenv";
 import connectDB from "./config/db.js";
+import cors from "cors";
+import morgan from "morgan";
 import testRoutes from "./routes/testRoutes.js"
 
 dotenv.config();
@@ -10,11 +12,18 @@ dotenv.config();
 // conect db
 connectDB();
 
+
+
 //rest object
 const app = express();
 
+// middlewares
+app.use(express.json());
+app.use(cors());
+app.use(morgan("dev"));
+
 //routes
-app.use("/api/v1/test",testRoutes)
+app.use("/api/v1/test/",testRoutes)
 
 //port
 const PORT = process.env.PORT || 8080;
