@@ -5,9 +5,11 @@ import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 import cors from "cors";
 import morgan from "morgan";
+import "express-async-errors"
 import testRoutes from "./routes/testRoutes.js"
 import authRoutes from "./routes/authRoutes.js"
 import errorMiddleware from "./middelwares/errorMiddleware.js";
+
  
 
 dotenv.config();
