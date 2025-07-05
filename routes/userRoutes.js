@@ -1,11 +1,14 @@
 import express from "express"
-import userAuth from "../middelwares/authmiddleware"
+import userAuth from "../middelwares/authmiddleware.js"
+import {updateUserController} from '../controller/userController.js'
 
 // router object
-const router = express.Router
+const router = express.Router();
 
 // routes
 // Get Users || Get
 
 // updates user || get
-router.put('/update-user',userAuth,upda)
+router.put('/update-user',userAuth,updateUserController)
+
+export default router;
