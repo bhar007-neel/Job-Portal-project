@@ -9,7 +9,9 @@ import "express-async-errors"
 import testRoutes from "./routes/testRoutes.js"
 import authRoutes from "./routes/authRoutes.js"
 import errorMiddleware from "./middelwares/errorMiddleware.js";
-import userRoutes from "./routes/userRoutes.js"
+import userRoutes from "./routes/userRoutes.js";
+import jobsRoutes from "./routes/jobsRoute.js"
+
 
  
 
@@ -27,11 +29,12 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 app.use(morgan("dev"));
+app.use('/api/v1/job',jobsRoutes)
 
 //routes
 app.use("/api/v1/test/",testRoutes)
 app.use("/api/v1/auth",authRoutes)
-app.use("/api/v1/auth",userRoutes)
+app.use("/api/v1/user",userRoutes)
 
 // validation middleware
 app.use(errorMiddleware)
