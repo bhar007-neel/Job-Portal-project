@@ -1,4 +1,5 @@
 import jobsModel from "../models/jobsModel.js";
+import mongoose from "mongoose";
 //=============  CREATE JOBS ======================
 export const createJobController = async (req, res, next) => {
   const { company, position } = req.body;
@@ -63,4 +64,68 @@ export const deleteJobController = async (req, res, next) => {
 
   await jobsModel.findByIdAndDelete(id);
     res.status(200).json({ message:"succesfully deleted"});
+};
+
+
+
+//======================  jobs stats function =====================================================================================
+
+export const jobStatsController = async (req, res) => {
+  const stats = await jobsModel.aggregate([
+    // search by user jobs
+    {
+      $match: {
+        createdBy: new mongoose.Types.ObjectId(req.user.userId),
+      },
+    },
+    {
+      $group: {
+        _id: "$status",
+        count: { $sum: 1 },
+      },
+    },
+  ]);
+
+  //default stats
+  const defaultStats = {
+    pending: stats.pending || 0,
+    reject: stats.reject || 0,
+    interview: stats.interview || 0,
+  };
+
+  //monthly yearly stats
+  let monthlyApplication = await jobsModel.aggregate([
+    {
+      $match: {
+        createdBy: new mongoose.Types.ObjectId(req.user.userId),
+      },
+    },
+    {
+      $group: {
+        _id: {
+          year: { $year: "$createdAt" },
+          month: { $month: "$createdAt" },
+        },
+        count: {
+          $sum: 1,
+        },
+      },
+    },
+  ]);
+  monthlyApplication = monthlyApplication
+    .map((item) => {
+      const {
+        _id: { year, month },
+        count,
+      } = item;
+      const date = moment()
+        .month(month - 1)
+        .year(year)
+        .format("MMM Y");
+      return { date, count };
+    })
+    .reverse();
+  res
+    .status(200)
+    .json({ totlaJob: stats.length, defaultStats, monthlyApplication });
 };
