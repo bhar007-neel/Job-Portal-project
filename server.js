@@ -41,7 +41,7 @@ const options = {
     },
     servers: [
       {
-//         url: "https://neeljobportalproject.netlify.app/",
+//         url: "http://localhost:8080",
             url: "https://nodejs-job-portal-app.onrender.com"
       },
     ],
